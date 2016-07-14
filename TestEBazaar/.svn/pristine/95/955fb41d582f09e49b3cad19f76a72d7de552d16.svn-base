@@ -1,0 +1,10 @@
+package subsystemtests;
+
+import business.externalinterfaces.ShoppingCart;
+
+public class OrderSubsystemTest {
+public void submitOrder(ShoppingCart cart){
+	
+	
+}
+}

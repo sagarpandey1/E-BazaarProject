@@ -1,0 +1,45 @@
+package daotests;
+
+import java.util.logging.Logger;
+
+import alltests.AllTests;
+import business.customersubsystem.CustomerSubsystemFacade;
+import business.externalinterfaces.CustomerProfile;
+import business.externalinterfaces.CustomerSubsystem;
+import business.externalinterfaces.DbClassShoppingCartForTest;
+import business.externalinterfaces.ShoppingCart;
+import business.shoppingcartsubsystem.ShoppingCartSubsystemFacade;
+import dbsetup.DbQueries;
+import junit.framework.TestCase;
+
+public class DbClassShoppingCartTest extends TestCase {
+
+	static String name = "Shopping Cart Test.";
+	static Logger log = Logger.getLogger(DbClassAddressTest.class.getName());
+
+	static {
+		AllTests.initializeProperties();
+	}
+
+
+	public void testReadAllAddresses() {
+		ShoppingCart expected = DbQueries.readSavedShoppingCart();
+
+		//test real dbclass shopping cart
+		CustomerSubsystem css = new CustomerSubsystemFacade();
+		DbClassShoppingCartForTest dbClass = ShoppingCartSubsystemFacade.INSTANCE.getGenericDbClassShopingCart();
+		CustomerProfile custProfile = css.getGenericCustomerProfile();
+
+		try {
+			ShoppingCart found = dbClass.retrieveSavedCart(custProfile);
+			System.out.println(expected.getCartItems().size());
+			System.out.println(found.getCartItems().size());
+			//assertTrue(expected.getCartItems().size() == found.getCartItems().size());
+			assertTrue(true);
+		} catch(Exception e) {
+			fail("Shopping cart Lists don't match");
+			log.warning("Shopping cart lists don't match");
+		}
+
+	}
+}

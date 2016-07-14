@@ -1,0 +1,3 @@
+This is the startup project for student teams. The
+data access subsystem uses PreparedStatements
+for SQL queries of all kinds.
